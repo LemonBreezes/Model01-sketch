@@ -1,0 +1,7 @@
+{
+  "cpu": {
+    "fqbn": "keyboardio:avr:model01",
+    "port": "/dev/ttyACM0",
+    "toolsFolders": "/usr/bin"
+  }
+}
