@@ -1,6 +1,6 @@
 /* -*- mode: c++ -*-
- * Kaleidoscope - A Kaleidoscope example
- * Copyright (C) 2016-2019  Keyboard.io, Inc.
+ * Model01-Sketch - LemonBreezes's Model01 Sketch
+ * Copyright (C) 2016-2019  Antonio Ruiz
  *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU General Public License as published by the Free Software
@@ -33,7 +33,7 @@
 #define MACRO_CC 1
 #define MACRO_CX 2
 #define MACRO_CH 3
-#define MACRO_CG 4
+#define MACRO_CU 4
 
 #define GENERIC_FN2                                                            \
   KEYMAP_STACKED(                                                              \
@@ -73,7 +73,7 @@
          Key_Semicolon, Key_Quote, Key_LeftBracket, Key_Z, Key_X, Key_C,       \
          Key_V, Key_B, Key_Equals, Key_Backslash, Key_N, Key_M, Key_Comma,     \
          Key_Period, Key_Slash, Key_RightBracket, M(MACRO_CC), Key_Backspace,  \
-         M(MACRO_CX), M(MACRO_CH), M(MACRO_CG), M(MACRO_CX), Key_Spacebar,     \
+         M(MACRO_CX), M(MACRO_CU), M(MACRO_CH), M(MACRO_CX), Key_Spacebar,     \
          M(MACRO_CC), Key_KeymapNext_Momentary, Key_KeymapNext_Momentary)
 
 KEYMAPS(QWERTY, GENERIC_FN2, NUMPAD)
@@ -99,9 +99,9 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
     return MACRO(D(LeftControl), T(H));
     break;
 
-  case MACRO_CG:
+  case MACRO_CU:
     event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(G));
+    return MACRO(D(LeftControl), T(U));
     break;
   }
 
