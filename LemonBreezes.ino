@@ -20,7 +20,6 @@
 #include "Kaleidoscope-LEDControl.h"
 #include "Kaleidoscope-LED-ActiveModColor.h"
 #include "Kaleidoscope-Macros.h"
-#include "Kaleidoscope-MagicCombo.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-NumPad.h"
 #include "Kaleidoscope-OneShot.h"
@@ -64,23 +63,19 @@
          Key_RightAlt, Key_Spacebar, Key_RightControl, Key_Keymap1_Momentary,  \
          Key_Keymap1_Momentary)
 
-#define QWERTY                                                                 \
-  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, LSHIFT(Key_9),         \
-         LSHIFT(Key_0), Key_6, Key_7, Key_8, Key_9, Key_0, Key_PageUp,         \
-         Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, Key_Enter,  \
-         Key_Y, Key_U, Key_I, Key_O, Key_P, Key_PageDown, Key_Minus, Key_A,    \
-         Key_S, Key_D, Key_F, Key_G, Key_H, Key_J, Key_K, Key_L,               \
-         Key_Semicolon, Key_Quote, Key_LeftBracket, Key_Z, Key_X, Key_C,       \
-         Key_V, Key_B, Key_Equals, Key_Backslash, Key_N, Key_M, Key_Comma,     \
-         Key_Period, Key_Slash, Key_RightBracket, M(MACRO_CC), Key_Backspace,  \
-         M(MACRO_CX), M(MACRO_CU), M(MACRO_CH), M(MACRO_CX), Key_Spacebar,     \
+#define QWERTY                                                                \
+  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, Key_Equals,           \
+         LCTRL(Key_G), Key_6, Key_7, Key_8, Key_9, Key_0, Key_PageUp,    \
+         Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, Key_Enter, \
+         Key_Y, Key_U, Key_I, Key_O, Key_P, Key_PageDown, Key_Minus, Key_A,   \
+         Key_S, Key_D, Key_F, Key_G, Key_H, Key_J, Key_K, Key_L,              \
+         Key_Semicolon, Key_Quote, Key_LeftBracket, Key_Z, Key_X, Key_C,      \
+         Key_V, Key_B, Key_Escape, Key_Backslash, Key_N, Key_M, Key_Comma,    \
+         Key_Period, Key_Slash, Key_RightBracket, M(MACRO_CC), Key_Backspace, \
+         M(MACRO_CX), M(MACRO_CU), M(MACRO_CH), M(MACRO_CX), Key_Spacebar,    \
          M(MACRO_CC), Key_KeymapNext_Momentary, Key_KeymapNext_Momentary)
 
 KEYMAPS(QWERTY, GENERIC_FN2, NUMPAD)
-
-enum {
-  MAGIC_ESCAPE,
-};
 
 const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   switch (macroIndex) {
@@ -108,18 +103,11 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   return MACRO_NONE;
 }
 
-void magicEscape(uint8_t combo_index) {
-  Macros.tap(Key_Escape);
-}
-
-USE_MAGIC_COMBOS([MAGIC_ESCAPE] = {.action = magicEscape, .keys = {R1C7, R1C8}});
-
 KALEIDOSCOPE_INIT_PLUGINS(LEDControl, LEDOff,
                           ActiveModColorEffect,
                           NumPad,
                           Macros,
                           MouseKeys,
-                          MagicCombo,
                           OneShot,
                           Qukeys);
 
@@ -146,7 +134,7 @@ QUKEYS(
   Qukeys.setMinimumHoldTime(120);
   // What fraction of the subsequent key can overlap with the qukey
   // for the qukey to activate alternate state.
-  Qukeys.setOverlapThreshold(95);
+  Qukeys.setOverlapThreshold(87);
   // How long we wait wait for a second tap to repeat the primary key.
   Qukeys.setMaxIntervalForTapRepeat(0);
   // How long does it take for the qukey to time out.
