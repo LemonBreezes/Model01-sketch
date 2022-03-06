@@ -29,10 +29,10 @@
 
 #define NUMPAD_KEYMAP 2
 
-#define MACRO_CC 1
-#define MACRO_CX 2
-#define MACRO_CH 3
-#define MACRO_CU 4
+#define MACRO_CC  1
+#define MACRO_CX  2
+#define MACRO_CU  3
+#define MACRO_ESC 4
 
 #define GENERIC_FN2                                                            \
   KEYMAP_STACKED(                                                              \
@@ -64,15 +64,15 @@
          Key_Keymap1_Momentary)
 
 #define QWERTY                                                                \
-  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, Key_Equals,           \
+  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, LSHIFT(Key_9),           \
          LCTRL(Key_G), Key_6, Key_7, Key_8, Key_9, Key_0, Key_PageUp,    \
          Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, Key_Enter, \
          Key_Y, Key_U, Key_I, Key_O, Key_P, Key_PageDown, Key_Minus, Key_A,   \
          Key_S, Key_D, Key_F, Key_G, Key_H, Key_J, Key_K, Key_L,              \
          Key_Semicolon, Key_Quote, Key_LeftBracket, Key_Z, Key_X, Key_C,      \
-         Key_V, Key_B, Key_Escape, Key_Backslash, Key_N, Key_M, Key_Comma,    \
+         Key_V, Key_B, Key_Equals, Key_Backslash, Key_N, Key_M, Key_Comma,    \
          Key_Period, Key_Slash, Key_RightBracket, M(MACRO_CC), Key_Backspace, \
-         M(MACRO_CX), M(MACRO_CU), M(MACRO_CH), M(MACRO_CX), Key_Spacebar,    \
+         M(MACRO_CX), Key_Escape, M(MACRO_ESC), M(MACRO_CX), Key_Spacebar,    \
          M(MACRO_CC), Key_KeymapNext_Momentary, Key_KeymapNext_Momentary)
 
 KEYMAPS(QWERTY, GENERIC_FN2, NUMPAD)
@@ -89,19 +89,20 @@ const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
     return MACRO(D(LeftControl), T(X));
     break;
 
-  case MACRO_CH:
-    event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(H));
-    break;
-
   case MACRO_CU:
     event.key = OSM(LeftControl);
     return MACRO(D(LeftControl), T(U));
+    break;
+
+  case MACRO_ESC:
+    event.key = OSM(LeftControl);
+    return MACRO(D(LeftControl), T(LeftBracket));
     break;
   }
 
   return MACRO_NONE;
 }
+
 
 KALEIDOSCOPE_INIT_PLUGINS(LEDControl, LEDOff,
                           ActiveModColorEffect,
