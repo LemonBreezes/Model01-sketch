@@ -29,26 +29,26 @@
 
 #define NUMPAD_KEYMAP 2
 
-#define MACRO_CC  1
-#define MACRO_CX  2
-#define MACRO_CU  3
-#define MACRO_ESC 4
+#define MACRO_CC 1
+#define MACRO_CX 2
+#define MACRO_CU 3
+#define MACRO_CH 4
 
-#define GENERIC_FN2                                                            \
-  KEYMAP_STACKED(                                                              \
-      ___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, XXX, Key_Tab,               \
-      Key_mouseBtnM, Key_mouseUp, ___, Key_mouseWarpNW, Key_mouseWarpNE,       \
-      Consumer_ScanNextTrack, Key_Home, Key_mouseL, Key_mouseDn, Key_mouseR,   \
-      Key_mouseWarpSW, Key_mouseWarpSE, Key_End, Key_Z, Key_X, Key_C, Key_V,   \
-      Key_mouseWarpEnd, ___, Key_LeftControl, Key_mouseBtnL, Key_LeftGui,      \
-      Key_LeftShift, ___,                                                      \
-                                                                               \
+#define GENERIC_FN2                                                                                     \
+  KEYMAP_STACKED(                                                                                       \
+      ___, Key_F1, Key_F2, Key_F3, Key_F4, Key_F5, XXX, Key_Tab,                                        \
+      Key_mouseBtnM, Key_mouseUp, ___, Key_mouseWarpNW, Key_mouseWarpNE,                                \
+      Consumer_ScanNextTrack, Key_Home, Key_mouseL, Key_mouseDn, Key_mouseR,                            \
+      Key_mouseWarpSW, Key_mouseWarpSE, Key_End, Key_Z, Key_X, Key_C, Key_V,                            \
+      Key_mouseWarpEnd, ___, Key_LeftControl, Key_mouseBtnL, Key_LeftGui,                               \
+      Key_LeftShift, ___,                                                                               \
+                                                                                                        \
       Key_mouseScrollUp, Key_F6, Key_F7, Key_F8, Key_F9, Key_F10, Key_KeypadNumLock, Key_mouseScrollDn, \
-      Consumer_PlaySlashPause, Key_LeftCurlyBracket, Key_RightCurlyBracket,    \
-      Key_LeftBracket, Key_RightBracket, System_Sleep, Key_LeftArrow,          \
-      Key_DownArrow, Key_UpArrow, Key_RightArrow, Key_F11, Key_F12, ___,       \
-      Consumer_VolumeDecrement, Consumer_VolumeIncrement, Key_BacklightDown,   \
-      Key_BacklightUp, Key_Backslash, Key_Pipe, Key_RightShift, Key_RightAlt,  \
+      Consumer_PlaySlashPause, Key_LeftCurlyBracket, Key_RightCurlyBracket,                             \
+      Key_LeftBracket, Key_RightBracket, System_Sleep, Key_LeftArrow,                                   \
+      Key_DownArrow, Key_UpArrow, Key_RightArrow, Key_F11, Key_F12, ___,                                \
+      Consumer_VolumeDecrement, Consumer_VolumeIncrement, Key_BacklightDown,                            \
+      Key_BacklightUp, Key_Backslash, Key_Pipe, Key_RightShift, Key_RightAlt,                           \
       Key_mouseBtnR, Key_RightControl, ___)
 
 #define NUMPAD                                                                 \
@@ -64,40 +64,41 @@
          Key_Keymap1_Momentary)
 
 #define QWERTY                                                                \
-  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, LSHIFT(Key_9),           \
-         LCTRL(Key_G), Key_6, Key_7, Key_8, Key_9, Key_0, Key_PageUp,    \
+  KEYMAP(Key_Delete, Key_1, Key_2, Key_3, Key_4, Key_5, LSHIFT(Key_9),        \
+         LCTRL(Key_G), Key_6, Key_7, Key_8, Key_9, Key_0, Key_PageUp,         \
          Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, Key_Enter, \
          Key_Y, Key_U, Key_I, Key_O, Key_P, Key_PageDown, Key_Minus, Key_A,   \
          Key_S, Key_D, Key_F, Key_G, Key_H, Key_J, Key_K, Key_L,              \
          Key_Semicolon, Key_Quote, Key_LeftBracket, Key_Z, Key_X, Key_C,      \
          Key_V, Key_B, Key_Equals, Key_Backslash, Key_N, Key_M, Key_Comma,    \
          Key_Period, Key_Slash, Key_RightBracket, M(MACRO_CC), Key_Backspace, \
-         M(MACRO_CX), Key_Escape, M(MACRO_ESC), M(MACRO_CX), Key_Spacebar,    \
+         M(MACRO_CX), M(MACRO_CH), Key_Escape, M(MACRO_CX), Key_Spacebar,    \
          M(MACRO_CC), Key_KeymapNext_Momentary, Key_KeymapNext_Momentary)
 
 KEYMAPS(QWERTY, GENERIC_FN2, NUMPAD)
 
 const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   switch (macroIndex) {
-  case MACRO_CC:
-    event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(C));
-    break;
+    case MACRO_CC:
+      event.key = OSM(LeftControl);
+      return MACRO(D(LeftControl), T(C));
+      break;
 
-  case MACRO_CX:
-    event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(X));
-    break;
 
-  case MACRO_CU:
-    event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(U));
-    break;
+    case MACRO_CX:
+      event.key = OSM(LeftControl);
+      return MACRO(D(LeftControl), T(X));
+      break;
 
-  case MACRO_ESC:
-    event.key = OSM(LeftControl);
-    return MACRO(D(LeftControl), T(LeftBracket));
-    break;
+    case MACRO_CU:
+      event.key = OSM(LeftControl);
+      return MACRO(D(LeftControl), T(U));
+      break;
+
+    case MACRO_CH:
+      event.key = OSM(LeftControl);
+      return MACRO(D(LeftControl), T(H));
+      break;
   }
 
   return MACRO_NONE;
@@ -126,11 +127,10 @@ QUKEYS(
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 11), Key_LeftShift),   // J
   )
 
-
   // How much time must pass from the last key for the qukey's alternate effect
   // to be resolvable.
-  Qukeys.setMinimumPriorInterval(75);
-  // How much time must the qukey be held for its alternate state
+  Qukeys.setMinimumPriorInterval(0);
+// How much time must the qukey be held for its alternate state
   // to be resolvable.
   Qukeys.setMinimumHoldTime(120);
   // What fraction of the subsequent key can overlap with the qukey
@@ -151,7 +151,7 @@ QUKEYS(
   OneShot.setTimeout(110);
   Kaleidoscope.setup();
 
-  ActiveModColorEffect.highlight_color = CRGB(0xff, 0x00, 0x00);
+  // ActiveModColorEffect.highlight_color_ = CRGB(0xff, 0x00, 0x00);
 
   NumPad.numPadLayer = NUMPAD_KEYMAP;
   LEDOff.activate();
